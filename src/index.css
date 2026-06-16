@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------- */
+/* IBM Plex Sans — bundled, variable  */
+/* ---------------------------------- */
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-Variable.ttf") format("truetype-variations");
+  font-weight: 100 700;
+  font-stretch: 85% 100%;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "IBM Plex Sans";
+  src: url("/fonts/IBMPlexSans-Italic-Variable.ttf") format("truetype-variations");
+  font-weight: 100 700;
+  font-stretch: 85% 100%;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ---------------------------------- */
+/* Design tokens (dashboard_design_extraction.md) */
+/* ---------------------------------- */
+:root {
+  --window-body: #f1f1f1;
+  --chrome-bg: #f6f6f6;
+  --panel-bg: #ffffff;
+  --border-light: #ededed;
+  --border-subtle: #e6e6e6;
+  --text-primary: #020202;
+  --text-strong: #0a0d14;
+  --text-secondary: #5d5e64;
+  --text-muted: #8a8d95;
+  --text-tertiary: #a8a8a8;
+  --text-faint: #c1c1c1;
+  --icon-soft: #b5b5b5;
+  --control-close: #ea6b65;
+  --control-minimize: #f3bf52;
+  --control-maximize: #5ec550;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  user-select: none;
+  color: var(--text-secondary);
+}
+
+/* Wallpaper: real image + gradient fallback while it loads */
+.desktop-wallpaper {
+  background:
+    url("/wallpaper.jpg") center / cover no-repeat,
+    radial-gradient(circle at 60% 8%, rgba(220, 240, 251, 0.95) 0%, rgba(220, 240, 251, 0.55) 8%, transparent 24%),
+    radial-gradient(circle at 2% 33%, rgba(222, 200, 114, 0.88) 0%, rgba(222, 200, 114, 0.55) 10%, transparent 30%),
+    radial-gradient(circle at 86% 62%, rgba(255, 255, 255, 0.92) 0%, rgba(182, 223, 235, 0.72) 12%, transparent 32%),
+    radial-gradient(circle at 80% 98%, rgba(207, 238, 207, 0.9) 0%, rgba(207, 238, 207, 0.55) 11%, transparent 25%),
+    linear-gradient(135deg, #c0ebd0 0%, #98d9d1 32%, #8ed8ce 56%, #9bd5a3 76%, #bbd190 100%);
+}
+
+/* Liquid Glass surfaces */
+.liquid-glass {
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.10) 45%, rgba(255, 255, 255, 0.22) 100%),
+    rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.78),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.18),
+    inset 1px 0 0 rgba(255, 255, 255, 0.25),
+    0 20px 60px rgba(0, 0, 0, 0.18),
+    0 4px 14px rgba(0, 0, 0, 0.10);
+}
+
+/* Premium dock-specific glass: layered, glossy, rim-lit, floating */
+.dock-glass {
+  position: relative;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.38) 0%, rgba(255, 255, 255, 0.14) 38%, rgba(255, 255, 255, 0.10) 100%),
+    rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  backdrop-filter: blur(26px) saturate(165%);
+  -webkit-backdrop-filter: blur(26px) saturate(165%);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.85),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.16),
+    inset 1px 0 0 rgba(255, 255, 255, 0.28),
+    inset -1px 0 0 rgba(255, 255, 255, 0.28),
+    0 22px 56px rgba(0, 0, 0, 0.20),
+    0 6px 18px rgba(0, 0, 0, 0.10);
+}
+/* faint top glass highlight band */
+.dock-glass::before {
+  content: "";
+  position: absolute;
+  inset: 1px 1px auto 1px;
+  height: 46%;
+  border-radius: inherit;
+  border-bottom-left-radius: 40%;
+  border-bottom-right-radius: 40%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.34) 0%, rgba(255, 255, 255, 0) 100%);
+  pointer-events: none;
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .dock-glass {
+    background: rgba(255, 255, 255, 0.86);
+  }
+}
+
+.glass-tooltip {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.40) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px) saturate(165%);
+  -webkit-backdrop-filter: blur(20px) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 8px 22px rgba(0, 0, 0, 0.14),
+    0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* glossy sheen swept across the dock */
+.dock-sheen {
+  background: linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 18%,
+    rgba(255, 255, 255, 0.12) 32%,
+    transparent 48%,
+    rgba(255, 255, 255, 0.28) 78%,
+    transparent 100%
+  );
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* Window bounds animate smoothly except while dragging/resizing */
+.window-frame {
+  transition:
+    left 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+    top 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+    width 0.34s cubic-bezier(0.32, 0.72, 0, 1),
+    height 0.34s cubic-bezier(0.32, 0.72, 0, 1);
+}
+.window-frame.interacting {
+  transition: none;
+}
+
+.traffic-light-icon {
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+.traffic-lights:hover .traffic-light-icon {
+  opacity: 1;
+}
+
+/* thin macOS-ish scrollbars inside app windows */
+.app-scroll {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.app-scroll::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .window-frame {
+    transition: none;
+  }
+}
+
+/* Stronger glass for the Appearance panel: readable on every background.
+   The whitish fill (not just blur) keeps dark text legible on bright,
+   busy, and dark wallpapers alike. */
+.liquid-glass-panel {
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px) saturate(165%);
+  -webkit-backdrop-filter: blur(28px) saturate(165%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.25),
+    0 18px 44px rgba(0, 0, 0, 0.18),
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  /* fallback overlay when backdrop-filter is unsupported */
+  .liquid-glass-panel {
+    background: rgba(255, 255, 255, 0.92);
+  }
+}
+
+/* ----- Preloader progress bar sheen ----- */
+/* A soft highlight that drifts across the filled portion of the loading
+   bar, giving it the gentle "alive" shimmer of a real macOS progress bar.
+   Suppressed under reduced-motion. */
+@keyframes loader-sheen {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+.loader-sheen {
+  animation: loader-sheen 1.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-sheen {
+    animation: none;
+    opacity: 0;
+  }
+}
+
+/* ----- Hero gradient dithering ----- */
+/* Smooth, low-saturation gradients (esp. dark tones) can show visible
+   "Mach banding" — false contour lines the eye perceives in flat color
+   ramps. A faint noise overlay breaks up the banding without being visible
+   as texture itself. */
+.hero-noise::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='128'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ----- Mobile touch polish ----- */
+/* Remove the gray tap-flash on iOS, stop long-press callouts on buttons/links,
+   and prevent Safari from auto-inflating text in landscape. Inputs keep
+   selection/callout so fields still behave normally. */
+@media (max-width: 767px) {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  button,
+  a {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  /* Contain overscroll so sheets don't rubber-band the whole page */
+  .mobile-scroll {
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
