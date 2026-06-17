@@ -7,7 +7,7 @@ import {
   type ReactNode,
 } from "react";
 
-export const VIRTUAL_CANVAS = { w: 2800, h: 2280 };
+export const VIRTUAL_CANVAS = { w: 2800, h: 3200 };
 
 interface FigmaCanvasProps {
   children: ReactNode;

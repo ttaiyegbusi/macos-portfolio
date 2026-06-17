@@ -22,10 +22,10 @@ export const FRAME_CENTERS: Record<string, { x: number; y: number }> = {
   icametoo: { x: 2240, y: 600 },
   "Football booth": { x: 660, y: 1460 },
   "Chain Core": { x: 2220, y: 1420 },
-  Reeple: { x: 481, y: 1838 },
-  Turbopay: { x: 1094, y: 1838 },
-  Wiremoney: { x: 1706, y: 1838 },
-  Myrentease: { x: 2319, y: 1838 },
+  Reeple: { x: 590, y: 1957 },
+  Turbopay: { x: 1910, y: 1957 },
+  Wiremoney: { x: 910, y: 2871 },
+  Myrentease: { x: 2230, y: 2871 },
 };
 
 const HERO_X = VIRTUAL_CANVAS.w / 2 - 318;
@@ -256,28 +256,30 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
         </div>
       </CanvasFrame>
 
-      {/* Real-mockup project frames — clicking these (not the sidebar) opens the case study */}
+      {/* Real-mockup project frames — clicking these (not the sidebar) opens the
+          case study. Spaced apart like every other frame on this canvas, not
+          packed into a tight row. */}
       <MockupFrame
         pageName="Reeple"
-        style={{ left: 200, top: 1650, width: 562 }}
+        style={{ left: 280, top: 1750, width: 620 }}
         backdrop="linear-gradient(135deg, #f3e7fb 0%, #e3e8fb 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Turbopay"
-        style={{ left: 812, top: 1650, width: 562 }}
+        style={{ left: 1600, top: 1750, width: 620 }}
         backdrop="linear-gradient(135deg, #efeafc 0%, #ddd6f5 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Wiremoney"
-        style={{ left: 1425, top: 1650, width: 562 }}
+        style={{ left: 600, top: 2664, width: 620 }}
         backdrop="linear-gradient(135deg, #ffffff 0%, #f1f3f6 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Myrentease"
-        style={{ left: 2037, top: 1650, width: 562 }}
+        style={{ left: 1920, top: 2664, width: 620 }}
         backdrop="linear-gradient(135deg, #ffffff 0%, #eef0f4 100%)"
         onOpen={onOpenProject}
       />
