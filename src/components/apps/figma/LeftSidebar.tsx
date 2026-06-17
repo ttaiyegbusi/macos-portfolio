@@ -2,20 +2,41 @@ import { useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { File, Hash, PanelLeft, Plus, Search } from "lucide-react";
 
-const PAGES = ["About Me", "Knit", "icametoo", "Football booth", "Chain Core", "Reeple", "Turbopay"];
+const PAGES = [
+  "About Me",
+  "Knit",
+  "icametoo",
+  "Football booth",
+  "Chain Core",
+  "Reeple",
+  "Turbopay",
+  "Wiremoney",
+  "Myrentease",
+];
 const PROJECTS = ["Keyboard", "Mobile App", "Mobile App"];
 
-/** Pages that open the project case-study window when clicked. */
-export const CASE_STUDY_PAGES = new Set(["Knit", "icametoo", "Football booth", "Chain Core", "Reeple", "Turbopay"]);
+/** Pages that open the project case-study window when their canvas frame is clicked. */
+export const CASE_STUDY_PAGES = new Set([
+  "Knit",
+  "icametoo",
+  "Football booth",
+  "Chain Core",
+  "Reeple",
+  "Turbopay",
+  "Wiremoney",
+  "Myrentease",
+]);
 
-const ITEM_META: Record<string, { title: string; subtitle: string }> = {
+const ITEM_META: Record<string, { title: string; subtitle: string; thumb?: string }> = {
   "About Me": { title: "About Me", subtitle: "Portfolio overview" },
   Knit: { title: "Knit", subtitle: "Design tool" },
   icametoo: { title: "icametoo", subtitle: "Event discovery" },
   "Football booth": { title: "Football Booth", subtitle: "Social networking" },
   "Chain Core": { title: "Chain Core", subtitle: "Web3 dashboard" },
-  Reeple: { title: "Reeple", subtitle: "Remittances & payments" },
-  Turbopay: { title: "Turbopay", subtitle: "Payments app" },
+  Reeple: { title: "Reeple", subtitle: "Remittances & payments", thumb: "/images/projects/reeple-thumb.png" },
+  Turbopay: { title: "Turbopay", subtitle: "Payments app", thumb: "/images/projects/turbopay-thumb.png" },
+  Wiremoney: { title: "Wiremoney", subtitle: "Multi-currency accounts", thumb: "/images/projects/wiremoney-thumb.png" },
+  Myrentease: { title: "Rentease", subtitle: "Property & rent management", thumb: "/images/projects/myrentease-thumb.png" },
   Keyboard: { title: "Keyboard", subtitle: "3D exploration" },
   "Mobile App": { title: "Mobile App", subtitle: "Concept design" },
 };
@@ -168,7 +189,13 @@ export default function LeftSidebar({ activePage, onSelectPage, onCollapse, isDa
             }`}
             style={{ left: "calc(100% + 10px)", top: preview.top }}
           >
-            <div className={`h-[118px] w-full rounded-[4px] border ${isDarkMode ? "border-[#2a2a2a] bg-[#0f0f0f]" : "border-borderFaint bg-[#F6F6F6]"}`} />
+            {meta.thumb ? (
+              <div className={`h-[118px] w-full overflow-hidden rounded-[4px] border ${isDarkMode ? "border-[#2a2a2a]" : "border-borderFaint"}`}>
+                <img src={meta.thumb} alt="" className="h-full w-full object-cover" draggable={false} />
+              </div>
+            ) : (
+              <div className={`h-[118px] w-full rounded-[4px] border ${isDarkMode ? "border-[#2a2a2a] bg-[#0f0f0f]" : "border-borderFaint bg-[#F6F6F6]"}`} />
+            )}
             <p className={`mt-2 px-0.5 text-[12px] font-semibold leading-tight ${isDarkMode ? "text-[#ddd]" : "text-inkStrong"}`}>
               {meta.title}
             </p>

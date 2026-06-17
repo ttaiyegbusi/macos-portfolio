@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { DribbbleGlyph, LinkedInGlyph, MediumGlyph, TwitterBirdGlyph } from "./glyphs";
 import { VIRTUAL_CANVAS } from "./FigmaCanvas";
+import { PROJECTS_BY_PAGE } from "../../../data/projects";
 
 export const FRAME_CENTERS: Record<string, { x: number; y: number }> = {
   "About Me": { x: VIRTUAL_CANVAS.w / 2, y: VIRTUAL_CANVAS.h / 2 },
@@ -21,6 +22,10 @@ export const FRAME_CENTERS: Record<string, { x: number; y: number }> = {
   icametoo: { x: 2240, y: 600 },
   "Football booth": { x: 660, y: 1460 },
   "Chain Core": { x: 2220, y: 1420 },
+  Reeple: { x: 481, y: 1838 },
+  Turbopay: { x: 1094, y: 1838 },
+  Wiremoney: { x: 1706, y: 1838 },
+  Myrentease: { x: 2319, y: 1838 },
 };
 
 const HERO_X = VIRTUAL_CANVAS.w / 2 - 318;
@@ -115,7 +120,66 @@ function MiniBars({ tones }: { tones: string[] }) {
   );
 }
 
-export default function CanvasContent() {
+/**
+ * A real-mockup project frame: soft gradient backdrop card holding the
+ * actual screenshot, with the case-study caption underneath. Clicking it
+ * opens that project's case-study window (the "design itself" entry point,
+ * distinct from the sidebar, which only pans the canvas to here).
+ */
+function MockupFrame({
+  pageName,
+  style,
+  backdrop,
+  onOpen,
+}: {
+  pageName: string;
+  style: CSSProperties;
+  backdrop: string;
+  onOpen: (page: string) => void;
+}) {
+  const project = PROJECTS_BY_PAGE[pageName];
+  if (!project) return null;
+
+  return (
+    <div className="absolute" style={style}>
+      <button
+        type="button"
+        onClick={() => onOpen(pageName)}
+        onPointerDown={(e) => e.stopPropagation()}
+        aria-label={`Open ${project.windowTitle} case study`}
+        className="group block w-full overflow-hidden rounded-card border border-borderFaint shadow-card transition-transform duration-200 hover:-translate-y-0.5 hover:shadow-[0_18px_44px_rgba(0,0,0,0.14)]"
+        style={{ background: backdrop }}
+      >
+        <div className="flex items-center justify-center p-7">
+          {project.heroImage && (
+            <img
+              src={project.heroImage}
+              alt=""
+              draggable={false}
+              className="w-full rounded-[8px] shadow-[0_10px_28px_rgba(0,0,0,0.16)] transition-transform duration-200 group-hover:scale-[1.015]"
+            />
+          )}
+        </div>
+      </button>
+      <div className="mt-3 max-w-[460px]">
+        <p className="text-[10px] text-inkTertiary">
+          {project.category}
+          <span className="px-1.5 text-inkFaint">•</span>
+          {project.platforms.join(", ")}
+          <span className="px-1.5 text-inkFaint">•</span>
+          {project.year}
+        </p>
+        <p className="mt-1 text-[14px] font-semibold leading-snug text-inkStrong">{project.title}</p>
+      </div>
+    </div>
+  );
+}
+
+interface CanvasContentProps {
+  onOpenProject: (page: string) => void;
+}
+
+export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
   const lagosTime = useLagosTime();
 
   return (
@@ -191,6 +255,32 @@ export default function CanvasContent() {
           ))}
         </div>
       </CanvasFrame>
+
+      {/* Real-mockup project frames — clicking these (not the sidebar) opens the case study */}
+      <MockupFrame
+        pageName="Reeple"
+        style={{ left: 200, top: 1650, width: 562 }}
+        backdrop="linear-gradient(135deg, #f3e7fb 0%, #e3e8fb 100%)"
+        onOpen={onOpenProject}
+      />
+      <MockupFrame
+        pageName="Turbopay"
+        style={{ left: 812, top: 1650, width: 562 }}
+        backdrop="linear-gradient(135deg, #efeafc 0%, #ddd6f5 100%)"
+        onOpen={onOpenProject}
+      />
+      <MockupFrame
+        pageName="Wiremoney"
+        style={{ left: 1425, top: 1650, width: 562 }}
+        backdrop="linear-gradient(135deg, #ffffff 0%, #f1f3f6 100%)"
+        onOpen={onOpenProject}
+      />
+      <MockupFrame
+        pageName="Myrentease"
+        style={{ left: 2037, top: 1650, width: 562 }}
+        backdrop="linear-gradient(135deg, #ffffff 0%, #eef0f4 100%)"
+        onOpen={onOpenProject}
+      />
 
       {/* Hero block */}
       <section className="absolute" style={{ left: HERO_X, top: HERO_Y, width: 636 }}>

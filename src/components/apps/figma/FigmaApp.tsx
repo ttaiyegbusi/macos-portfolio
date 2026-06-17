@@ -4,7 +4,7 @@ import { PanelLeftOpen, X } from "lucide-react";
 import type { AppContentProps } from "../../../types";
 import FigmaCanvas from "./FigmaCanvas";
 import CanvasContent, { FRAME_CENTERS } from "./CanvasContent";
-import LeftSidebar, { CASE_STUDY_PAGES } from "./LeftSidebar";
+import LeftSidebar from "./LeftSidebar";
 import RightSidebar from "./RightSidebar";
 import { useProjectViewer } from "../../../context/ProjectViewerContext";
 import { useWindowManager } from "../../../context/WindowManager";
@@ -24,12 +24,13 @@ export default function FigmaApp({ controls, dragHandleProps }: AppContentProps)
   const selectPage = (page: string) => {
     setActivePage(page);
     setFocusKey((k) => k + 1);
-    if (CASE_STUDY_PAGES.has(page)) {
-      setActiveProject(page);
-      // handleDockClick covers open / restore-from-minimized / focus in one call,
-      // exactly like clicking the app's own dock icon would.
-      handleDockClick("projectPage");
-    }
+  };
+
+  const openProject = (page: string) => {
+    setActiveProject(page);
+    // handleDockClick covers open / restore-from-minimized / focus in one call,
+    // exactly like clicking the app's own dock icon would.
+    handleDockClick("projectPage");
   };
 
   return (
@@ -81,7 +82,7 @@ export default function FigmaApp({ controls, dragHandleProps }: AppContentProps)
       {/* ------ Body ------ */}
       <div className={`relative flex-1 overflow-hidden ${isDarkMode ? "bg-[#0f0f0f]" : "bg-windowBody"}`}>
         <FigmaCanvas focusPoint={FRAME_CENTERS[activePage] ?? null} focusKey={focusKey}>
-          <CanvasContent />
+          <CanvasContent onOpenProject={openProject} />
         </FigmaCanvas>
 
         {/* Floating sidebars */}
