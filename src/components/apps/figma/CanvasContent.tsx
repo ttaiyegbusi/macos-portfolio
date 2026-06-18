@@ -13,23 +13,31 @@ import {
   Timer,
 } from "lucide-react";
 import { DribbbleGlyph, LinkedInGlyph, MediumGlyph, TwitterBirdGlyph } from "./glyphs";
-import { VIRTUAL_CANVAS } from "./FigmaCanvas";
 import { PROJECTS_BY_PAGE } from "../../../data/projects";
 
+// A clean 3x3 grid, each cell 1500x1500, offset down by a top margin reserved
+// for purely decorative scenery (e.g. the Keyboard exploration) that isn't a
+// real page and never gets focused, so it never has to share a cell with one.
+const GRID_CELL = 1500;
+const GRID_TOP_MARGIN = 700;
+function cellCenter(col: number, row: number) {
+  return { x: col * GRID_CELL + GRID_CELL / 2, y: row * GRID_CELL + GRID_CELL / 2 + GRID_TOP_MARGIN };
+}
+
 export const FRAME_CENTERS: Record<string, { x: number; y: number }> = {
-  "About Me": { x: VIRTUAL_CANVAS.w / 2, y: VIRTUAL_CANVAS.h / 2 },
-  Knit: { x: 620, y: 540 },
-  icametoo: { x: 2240, y: 600 },
-  "Football booth": { x: 660, y: 1460 },
-  "Chain Core": { x: 2220, y: 1420 },
-  Reeple: { x: 590, y: 1957 },
-  Turbopay: { x: 1910, y: 1957 },
-  Wiremoney: { x: 910, y: 2871 },
-  Myrentease: { x: 2230, y: 2871 },
+  Knit: cellCenter(0, 0),
+  Wiremoney: cellCenter(1, 0),
+  icametoo: cellCenter(2, 0),
+  Reeple: cellCenter(0, 1),
+  "About Me": cellCenter(1, 1),
+  Turbopay: cellCenter(2, 1),
+  "Football booth": cellCenter(0, 2),
+  Myrentease: cellCenter(1, 2),
+  "Chain Core": cellCenter(2, 2),
 };
 
-const HERO_X = VIRTUAL_CANVAS.w / 2 - 318;
-const HERO_Y = VIRTUAL_CANVAS.h / 2 - 330;
+const HERO_X = 1932;
+const HERO_Y = 2650;
 
 function useLagosTime() {
   const [time, setTime] = useState("");
@@ -185,7 +193,7 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
   return (
     <>
       {/* Decorative frames */}
-      <CanvasFrame label="Knit — Wireframes" style={{ left: 420, top: 410, width: 400, height: 264 }}>
+      <CanvasFrame label="Knit — Wireframes" style={{ left: 550, top: 1318, width: 400, height: 264 }}>
         <div className="flex h-full">
           <div className="w-[88px] border-r border-borderFaint bg-[#FAFAFA] p-2.5">
             {[44, 60, 36, 52, 40].map((w, i) => (
@@ -203,7 +211,7 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
         </div>
       </CanvasFrame>
 
-      <CanvasFrame label="icametoo — Mobile App" style={{ left: 2150, top: 380, width: 180, height: 360 }}>
+      <CanvasFrame label="icametoo — Mobile App" style={{ left: 3660, top: 1270, width: 180, height: 360 }}>
         <div className="flex h-full flex-col bg-gradient-to-b from-[#0A0D14] to-[#2A2F3A] p-3">
           <div className="mx-auto mb-3 h-1 w-10 rounded-full bg-white/25" />
           <div className="mb-2 h-2 w-20 rounded-full bg-white/60" />
@@ -218,7 +226,7 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
         </div>
       </CanvasFrame>
 
-      <CanvasFrame label="Football booth — Match Hub" style={{ left: 430, top: 1330, width: 460, height: 260 }}>
+      <CanvasFrame label="Football booth — Match Hub" style={{ left: 520, top: 4320, width: 460, height: 260 }}>
         <div className="flex h-full flex-col bg-[#0E2A14] p-4">
           <div className="mb-3 flex items-center justify-between">
             <div className="h-2 w-16 rounded-full bg-white/55" />
@@ -237,7 +245,7 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
         </div>
       </CanvasFrame>
 
-      <CanvasFrame label="Chain Core — Dashboard" style={{ left: 1990, top: 1280, width: 460, height: 280 }}>
+      <CanvasFrame label="Chain Core — Dashboard" style={{ left: 3520, top: 4310, width: 460, height: 280 }}>
         <div className="flex h-full flex-col">
           <div className="flex items-center gap-2 border-b border-borderFaint px-3 py-2">
             <div className="h-2 w-2 rounded-full bg-[#3099DE]" />
@@ -248,7 +256,7 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
         </div>
       </CanvasFrame>
 
-      <CanvasFrame label="Keyboard — Exploration" style={{ left: 1240, top: 250, width: 330, height: 180 }}>
+      <CanvasFrame label="Keyboard — Exploration" style={{ left: 2085, top: 260, width: 330, height: 180 }}>
         <div className="grid h-full grid-cols-6 gap-1.5 bg-[#ECEEF1] p-3">
           {Array.from({ length: 18 }).map((_, i) => (
             <div key={i} className="rounded-[5px] border border-black/[0.07] bg-white shadow-[0_2px_0_rgba(0,0,0,0.08)]" />
@@ -257,29 +265,29 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
       </CanvasFrame>
 
       {/* Real-mockup project frames — clicking these (not the sidebar) opens the
-          case study. Spaced apart like every other frame on this canvas, not
-          packed into a tight row. */}
+          case study. Each sits in its own 1500x1500 grid cell, fully isolated
+          from every neighbor even on a large/maximized Figma window. */}
       <MockupFrame
         pageName="Reeple"
-        style={{ left: 280, top: 1750, width: 620 }}
+        style={{ left: 440, top: 2743, width: 620 }}
         backdrop="linear-gradient(135deg, #f3e7fb 0%, #e3e8fb 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Turbopay"
-        style={{ left: 1600, top: 1750, width: 620 }}
+        style={{ left: 3440, top: 2743, width: 620 }}
         backdrop="linear-gradient(135deg, #efeafc 0%, #ddd6f5 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Wiremoney"
-        style={{ left: 600, top: 2664, width: 620 }}
+        style={{ left: 1940, top: 1243, width: 620 }}
         backdrop="linear-gradient(135deg, #ffffff 0%, #f1f3f6 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Myrentease"
-        style={{ left: 1920, top: 2664, width: 620 }}
+        style={{ left: 1940, top: 4243, width: 620 }}
         backdrop="linear-gradient(135deg, #ffffff 0%, #eef0f4 100%)"
         onOpen={onOpenProject}
       />
