@@ -28,7 +28,7 @@ export const CASE_STUDY_PAGES = new Set([
 ]);
 
 const ITEM_META: Record<string, { title: string; subtitle: string; thumb?: string }> = {
-  "About Me": { title: "About Me", subtitle: "Portfolio overview", thumb: "/images/projects/about-me-thumb.png" },
+  "About Me": { title: "About Me", subtitle: "Portfolio overview" },
   Knit: { title: "Knit", subtitle: "Design tool", thumb: "/images/projects/knit-thumb.png" },
   icametoo: { title: "icametoo", subtitle: "Event discovery", thumb: "/images/projects/icametoo-thumb.png" },
   "Football booth": { title: "Football Booth", subtitle: "Social networking", thumb: "/images/projects/football-booth-thumb.png" },
