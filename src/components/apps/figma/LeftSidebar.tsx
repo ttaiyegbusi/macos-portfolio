@@ -28,11 +28,11 @@ export const CASE_STUDY_PAGES = new Set([
 ]);
 
 const ITEM_META: Record<string, { title: string; subtitle: string; thumb?: string }> = {
-  "About Me": { title: "About Me", subtitle: "Portfolio overview" },
-  Knit: { title: "Knit", subtitle: "Design tool" },
-  icametoo: { title: "icametoo", subtitle: "Event discovery" },
-  "Football booth": { title: "Football Booth", subtitle: "Social networking" },
-  "Chain Core": { title: "Chain Core", subtitle: "Web3 dashboard" },
+  "About Me": { title: "About Me", subtitle: "Portfolio overview", thumb: "/images/projects/about-me-thumb.png" },
+  Knit: { title: "Knit", subtitle: "Design tool", thumb: "/images/projects/knit-thumb.png" },
+  icametoo: { title: "icametoo", subtitle: "Event discovery", thumb: "/images/projects/icametoo-thumb.png" },
+  "Football booth": { title: "Football Booth", subtitle: "Social networking", thumb: "/images/projects/football-booth-thumb.png" },
+  "Chain Core": { title: "Chain Core", subtitle: "Web3 dashboard", thumb: "/images/projects/chain-core-thumb.png" },
   Reeple: { title: "Reeple", subtitle: "Remittances & payments", thumb: "/images/projects/reeple-thumb.png" },
   Turbopay: { title: "Turbopay", subtitle: "Payments app", thumb: "/images/projects/turbopay-thumb.png" },
   Wiremoney: { title: "Wiremoney", subtitle: "Multi-currency accounts", thumb: "/images/projects/wiremoney-thumb.png" },
