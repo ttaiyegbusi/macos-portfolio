@@ -84,7 +84,7 @@ export default function ProjectCaseStudy({ project, scrollRef, sectionRefs }: Pr
       <h1 className="text-[26px] font-semibold leading-[1.3] tracking-tight text-inkStrong">{project.title}</h1>
 
       {/* Hero */}
-      <div ref={heroRef} className="mt-7 overflow-hidden rounded-[14px] border border-borderFaint shadow-card">
+      <div ref={heroRef} className="mt-7 overflow-hidden rounded-[14px]">
         {project.heroImage ? (
           <img src={project.heroImage} alt="" className="h-auto w-full object-cover" loading="eager" />
         ) : (

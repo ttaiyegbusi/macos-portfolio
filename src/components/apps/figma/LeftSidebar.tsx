@@ -60,6 +60,7 @@ export default function LeftSidebar({ activePage, onSelectPage, onCollapse, isDa
   const [preview, setPreview] = useState<HoverPreview | null>(null);
 
   const showPreview = (name: string) => (e: React.MouseEvent<HTMLElement>) => {
+    if (name === "About Me") return;
     const wrapper = wrapperRef.current;
     if (!wrapper) return;
     const rowRect = e.currentTarget.getBoundingClientRect();
