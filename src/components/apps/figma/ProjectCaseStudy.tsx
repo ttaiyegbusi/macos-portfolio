@@ -72,7 +72,7 @@ export default function ProjectCaseStudy({ project, scrollRef, sectionRefs }: Pr
   };
 
   return (
-    <div className="max-w-[680px] px-8 py-9 sm:pl-9 sm:pr-10">
+    <div className="mx-auto w-full max-w-[720px] px-8 py-9 sm:px-12">
       {/* Metadata + title */}
       <p className="mb-3 text-[12px] text-inkTertiary">
         {project.category}

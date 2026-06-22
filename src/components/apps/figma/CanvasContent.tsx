@@ -270,13 +270,13 @@ export default function CanvasContent({ onOpenProject }: CanvasContentProps) {
       <MockupFrame
         pageName="Reeple"
         style={{ left: 440, top: 2743, width: 620 }}
-        backdrop="linear-gradient(135deg, #f3e7fb 0%, #e3e8fb 100%)"
+        backdrop="linear-gradient(135deg, #f5f5f7 0%, #ebebed 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
         pageName="Turbopay"
         style={{ left: 3440, top: 2743, width: 620 }}
-        backdrop="linear-gradient(135deg, #efeafc 0%, #ddd6f5 100%)"
+        backdrop="linear-gradient(135deg, #f5f5f7 0%, #ebebed 100%)"
         onOpen={onOpenProject}
       />
       <MockupFrame
