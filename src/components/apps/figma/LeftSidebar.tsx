@@ -75,10 +75,10 @@ export default function LeftSidebar({ activePage, onSelectPage, onCollapse, isDa
   return (
     <div ref={wrapperRef} className="relative h-full w-full">
       <div
-        className={`flex h-full w-full flex-col overflow-hidden rounded-panel border shadow-panel backdrop-blur-sm ${
+        className={`flex h-full w-full flex-col overflow-hidden rounded-panel border ${
           isDarkMode
-            ? "border-[#3a3a3a] bg-[#222]/90"
-            : "border-borderLight bg-white/90"
+            ? "border-[#3a3a3a] bg-[#222] shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.35)]"
+            : "border-borderLight bg-white/90 shadow-panel backdrop-blur-sm"
         }`}
       >
         {/* Title row */}

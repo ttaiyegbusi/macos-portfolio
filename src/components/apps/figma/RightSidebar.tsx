@@ -27,8 +27,10 @@ export default function RightSidebar({ isDarkMode = false, onToggleDarkMode }: R
 
   return (
     <div
-      className={`flex h-full w-full flex-col overflow-hidden rounded-panel border shadow-panel backdrop-blur-sm ${
-        isDarkMode ? "border-[#3a3a3a] bg-[#252525]/95" : "border-borderLight bg-white/90"
+      className={`flex h-full w-full flex-col overflow-hidden rounded-panel border ${
+        isDarkMode
+          ? "border-[#3a3a3a] bg-[#252525] shadow-[0_1px_2px_rgba(0,0,0,0.4),0_8px_24px_rgba(0,0,0,0.35)]"
+          : "border-borderLight bg-white/90 shadow-panel backdrop-blur-sm"
       }`}
     >
       {/* Profile header */}
